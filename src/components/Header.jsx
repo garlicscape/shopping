@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { IoIosBasket } from 'react-icons/io';
 import { BsCart } from 'react-icons/bs';
 import { login, logout, onUserStateChange } from '../api/firebase';
+import UserAvatar from './UserAvatar';
 
 export default function Header() {
   const [user, setUser] = useState();
@@ -28,9 +29,12 @@ export default function Header() {
         <h3 className='text-sky-600 text-4xl font-bold'>US</h3>
       </Link>
       <nav className='flex items-center gap-3 font-bold'>
-        <Link to='/cart' className='text-2xl'>
-          <BsCart />
-        </Link>
+        {user && <UserAvatar user={user} />}
+        {user && (
+          <Link to='/cart' className='text-2xl'>
+            <BsCart />
+          </Link>
+        )}
         {!user && (
           <button className='text-xl' onClick={handleLogin}>
             Login
