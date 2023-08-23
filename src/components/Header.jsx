@@ -4,6 +4,7 @@ import { IoIosBasket } from 'react-icons/io';
 import { BsCart } from 'react-icons/bs';
 import { login, logout, onUserStateChange } from '../api/firebase';
 import UserAvatar from './UserAvatar';
+import { BiPencil } from 'react-icons/bi';
 
 export default function Header() {
   const [user, setUser] = useState();
@@ -33,6 +34,11 @@ export default function Header() {
         {user && (
           <Link to='/cart' className='text-2xl'>
             <BsCart />
+          </Link>
+        )}
+        {user && (
+          <Link to='/products/new' className='text-2xl'>
+            <BiPencil />
           </Link>
         )}
         {!user && (
