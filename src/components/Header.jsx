@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosBasket } from 'react-icons/io';
 import { BsCart } from 'react-icons/bs';
+import { login, logout, onUserStateChange } from '../api/firebase';
 
 export default function Header() {
+  const [user, setUser] = useState();
+
+  const handleLogin = () => {
+    login().then(setUser);
+  };
+  const handleLogout = () => {
+    logout().then(setUser);
+  };
+
+  useEffect(() => {
+    onUserStateChange((user) => {
+      setUser(user);
+      console.log(user);
+    });
+  }, []);
   return (
     <header className='my-2 flex '>
       <Link to='/' className='flex items-center m-auto'>
@@ -15,7 +31,16 @@ export default function Header() {
         <Link to='/cart' className='text-2xl'>
           <BsCart />
         </Link>
-        <button className='text-xl'>Login</button>
+        {!user && (
+          <button className='text-xl' onClick={handleLogin}>
+            Login
+          </button>
+        )}
+        {user && (
+          <button className='text-xl' onClick={handleLogout}>
+            Logout
+          </button>
+        )}
       </nav>
     </header>
   );
