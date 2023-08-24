@@ -5,16 +5,10 @@ import { BsCart } from 'react-icons/bs';
 import { login, logout, onUserStateChange } from '../api/firebase';
 import UserAvatar from './UserAvatar';
 import { BiPencil } from 'react-icons/bi';
+import Button from './ui/Button';
 
 export default function Header() {
   const [user, setUser] = useState();
-
-  const handleLogin = () => {
-    login().then(setUser);
-  };
-  const handleLogout = () => {
-    logout().then(setUser);
-  };
 
   useEffect(() => {
     onUserStateChange((user) => {
@@ -37,21 +31,13 @@ export default function Header() {
             <BsCart />
           </Link>
         )}
-        {user && (
+        {user && user.isAdmin && (
           <Link to='/products/new' className='text-2xl'>
             <BiPencil />
           </Link>
         )}
-        {!user && (
-          <button className='text-xl' onClick={handleLogin}>
-            Login
-          </button>
-        )}
-        {user && (
-          <button className='text-xl' onClick={handleLogout}>
-            Logout
-          </button>
-        )}
+        {!user && <Button text='Login' onClick={login} />}
+        {user && <Button text='Logout' onClick={logout} />}
       </nav>
     </header>
   );
