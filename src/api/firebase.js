@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { v4 as uuid } from 'uuid';
 import {
   getAuth,
   signInWithPopup,
@@ -6,6 +7,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
 } from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,6 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+const db = getDatabase();
 
 export async function login() {
   return signInWithPopup(auth, provider)
@@ -36,5 +39,17 @@ export async function logout() {
 export function onUserStateChange(callback) {
   onAuthStateChanged(auth, (user) => {
     callback(user);
+  });
+}
+
+export async function addNewProduct(product, imgURL) {
+  const id = uuid();
+  set(ref(db, `products/${id}`), {
+    ...product,
+    id,
+    price: parseInt(product.price),
+    image: imgURL,
+    color: product.color.split(','),
+    size: product.size.split(','),
   });
 }
