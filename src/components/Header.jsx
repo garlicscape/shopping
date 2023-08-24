@@ -22,6 +22,7 @@ export default function Header() {
       console.log(user);
     });
   }, []);
+
   return (
     <header className='my-2 flex '>
       <Link to='/' className='flex items-center m-auto'>
