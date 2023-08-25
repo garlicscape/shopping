@@ -27,6 +27,7 @@ export function login() {
 
 export async function logout() {
   signOut(auth).catch(console.error);
+  localStorage.removeItem('user');
 }
 
 export function onUserStateChange(callback) {
