@@ -1,17 +1,20 @@
-import ReactiveButton from 'reactive-button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { addNewProduct } from '../api/firebase';
 import { uploadImg } from '../api/upload';
 import React, { useState } from 'react';
+import ReactiveButton from 'reactive-button';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const INPUT_CLASS = 'h-10 px-2 outline-none focus:bg-gray-100 text-lg';
 
 export default function NewProduct() {
   const [file, setFile] = useState();
   const [product, setProduct] = useState({});
+  const [btnState, setBtnState] = useState('idle');
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-
     if (name === 'file') {
       setFile(files && files[0]);
     }
@@ -20,15 +23,19 @@ export default function NewProduct() {
       [name]: value,
     }));
   };
-  const hadleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('product');
-    console.log(product);
-    console.log(file);
-    uploadImg(file).then((url) => {
-      console.log(url);
-      addNewProduct(product, url);
-    });
+    setBtnState('loading');
+    uploadImg(file) //
+      .then((url) => {
+        addNewProduct(product, url) //
+          .then(() => {
+            setBtnState('success');
+            setTimeout(() => {
+              setBtnState('idle');
+            }, 4000);
+          });
+      });
   };
 
   return (
@@ -46,7 +53,7 @@ export default function NewProduct() {
         </div>
         <form
           action=''
-          onSubmit={hadleSubmit}
+          onSubmit={handleSubmit}
           className='flex flex-col basis-5/12 gap-2'
         >
           <input
@@ -61,6 +68,15 @@ export default function NewProduct() {
             name='title'
             placeholder='제품 이름'
             value={product.title ?? ''}
+            onChange={handleChange}
+            className={INPUT_CLASS}
+            required
+          />
+          <input
+            type='text'
+            name='category'
+            placeholder='카테고리 (,로 구분)'
+            value={product.category ?? ''}
             onChange={handleChange}
             className={INPUT_CLASS}
             required
@@ -102,7 +118,19 @@ export default function NewProduct() {
             required
           />
           <ReactiveButton
+            type='submit'
+            buttonState={btnState}
             idleText='등록'
+            loadingText={
+              <>
+                <FontAwesomeIcon icon={faSpinner} spin /> 제품 등록 중
+              </>
+            }
+            successText={
+              <>
+                <FontAwesomeIcon icon={faCheck} /> 등록이 완료되었습니다.
+              </>
+            }
             color='blue'
             size='large'
             style={{
