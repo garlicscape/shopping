@@ -1,3 +1,4 @@
+import ReactiveButton from 'reactive-button';
 import { addNewProduct } from '../api/firebase';
 import { uploadImg } from '../api/upload';
 import React, { useState } from 'react';
@@ -100,9 +101,16 @@ export default function NewProduct() {
             className={INPUT_CLASS}
             required
           />
-          <button className='bg-sky-600 text-white py-2 rounded font-bold hover:bg-sky-700 ease-in duration-200'>
-            등록
-          </button>
+          <ReactiveButton
+            idleText='등록'
+            color='blue'
+            size='large'
+            style={{
+              fontSize: '16px',
+              fontWeight: 'bold',
+              borderRadius: '5px',
+            }}
+          ></ReactiveButton>
         </form>
       </section>
     </section>

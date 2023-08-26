@@ -4,7 +4,7 @@ import { IoIosBasket } from 'react-icons/io';
 import { BsCart } from 'react-icons/bs';
 import UserAvatar from './UserAvatar';
 import { BiPencil } from 'react-icons/bi';
-import Button from './ui/Button';
+import Button from '../components/ui/Button';
 import { useAuthContext } from './context/AuthContext';
 
 export default function Header() {

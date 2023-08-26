@@ -1,20 +1,18 @@
 import React from 'react';
-import { AwesomeButton } from 'react-awesome-button';
-import 'react-awesome-button/dist/styles.css';
+import ReactiveButton from 'reactive-button';
+import '../ui/Button.css';
 
 export default function Button({ text, onClick }) {
   return (
-    <AwesomeButton
-      onPress={onClick}
+    <ReactiveButton
+      size='small'
+      onClick={onClick}
+      idleText={text}
       style={{
-        fontSize: '17px',
+        fontSize: '16px',
         fontWeight: 'bold',
-        width: '80px',
-        height: '37px',
-        buttonPrimaryColor: 'black',
+        borderRadius: '5px',
       }}
-    >
-      {text}
-    </AwesomeButton>
+    ></ReactiveButton>
   );
 }
