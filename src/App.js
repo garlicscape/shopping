@@ -3,14 +3,18 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Header from './components/Header';
 import { AuthContextProvider } from './components/context/AuthContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+const queryClinet = new QueryClient();
 function App() {
   return (
-    <AuthContextProvider>
-      <Header />
-      <Navbar />
-      <Outlet />
-    </AuthContextProvider>
+    <QueryClientProvider client={queryClinet}>
+      <AuthContextProvider>
+        <Header />
+        <Navbar />
+        <Outlet />
+      </AuthContextProvider>
+    </QueryClientProvider>
   );
 }
 
