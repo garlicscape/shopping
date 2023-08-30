@@ -10,6 +10,7 @@ import Products from '../src/pages/Products';
 import NewProduct from '../src/pages/NewProduct';
 import Cart from './pages/Cart';
 import ProtectedRoute from './pages/ProtectedRoute';
+import ProductDetail from './pages/ProductDetail';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
             <Cart />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: '/products/:productId',
+        element: <ProductDetail />,
       },
     ],
   },
