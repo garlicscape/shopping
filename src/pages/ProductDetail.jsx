@@ -108,7 +108,12 @@ export default function ProductDetail() {
 
         <ul>
           {selectedList.map((item) => (
-            <SelectedOptionList key={uuid()} options={item} />
+            <SelectedOptionList
+              key={uuid()}
+              options={item}
+              title={title}
+              price={price}
+            />
           ))}
         </ul>
 
