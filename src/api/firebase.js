@@ -75,3 +75,5 @@ export async function getProducts() {
     })
     .catch(console.error);
 }
+
+export async function addProductToCart() {}
