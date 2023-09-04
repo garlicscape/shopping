@@ -4,6 +4,7 @@ import ReactiveButton from 'reactive-button';
 import { AiFillTag } from 'react-icons/ai';
 import SelectedOptionList from '../components/SelectedOptionList';
 import { v4 as uuid } from 'uuid';
+import { AiOutlineStop } from 'react-icons/ai';
 
 export default function ProductDetail() {
   const {
@@ -15,6 +16,7 @@ export default function ProductDetail() {
     color: '',
     size: '',
   });
+  const [total, setTotal] = useState(0);
   const [message, setMessage] = useState('');
   const [selectedList, setSelectedList] = useState([]);
   const [optionSelected, setOptionSelected] = useState(false);
@@ -128,7 +130,13 @@ export default function ProductDetail() {
           }}
           onClick={handleClick}
         />
-        {message && <p>{message}</p>}
+
+        {message && (
+          <p className='mt-5 bg-slate-100 py-6 flex items-center justify-center animate-appear-alert'>
+            <AiOutlineStop className='text-amber-500 mr-1 text-xl transform ' />
+            {message}
+          </p>
+        )}
       </div>
     </section>
   );
