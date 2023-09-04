@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { TfiClose } from 'react-icons/tfi';
 
-export default function SelectedOptionList({ options, title, price }) {
+export default function SelectedOptionList({
+  options,
+  title,
+  price,
+  onDelete,
+}) {
   const { color, size } = options;
   const [quantity, setQuantity] = useState(1);
 
@@ -11,8 +16,13 @@ export default function SelectedOptionList({ options, title, price }) {
   };
 
   const handleMinus = () => {
-    if (quantity >= 2) setQuantity(quantity - 1);
+    if (quantity >= 2) {
+      setQuantity(quantity - 1);
+    }
   };
+
+  const handleDelete = () => onDelete(options);
+
   return (
     <li className='p-3 border-b-2 border-gray-300 grid grid-cols-10 gap-3 items-center'>
       <div className='col-span-4'>
@@ -31,7 +41,10 @@ export default function SelectedOptionList({ options, title, price }) {
         />
       </div>
       <p className='font-bold text-lg col-span-2'>{`₩${price * quantity}`}</p>
-      <TfiClose className='cursor-pointer col-span-1 place-self-end self-center ' />
+      <TfiClose
+        onClick={handleDelete}
+        className='cursor-pointer col-span-1 place-self-end self-center '
+      />
     </li>
   );
 }

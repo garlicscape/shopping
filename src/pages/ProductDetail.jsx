@@ -40,6 +40,10 @@ export default function ProductDetail() {
     setOptionSelected(true);
   };
 
+  const handleDelete = (deleted) => {
+    setSelectedList((list) => list.filter((option) => option !== deleted));
+  };
+
   const handleClick = () => {
     const product = { id, title, image, price, size, color };
     console.log({ product });
@@ -115,9 +119,12 @@ export default function ProductDetail() {
               options={item}
               title={title}
               price={price}
+              onDelete={handleDelete}
             />
           ))}
         </ul>
+
+        <p className='text-right'>{`총 ${total}원`}</p>
 
         <ReactiveButton
           idleText='장바구니에 추가'
