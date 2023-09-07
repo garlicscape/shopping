@@ -41,7 +41,26 @@ export default function ProductDetail() {
   };
 
   const handleDelete = (deleted) => {
+    console.log(deleted);
     setSelectedList((list) => list.filter((option) => option !== deleted));
+  };
+
+  const handlePlus = (plused) => {
+    setSelectedList((list) =>
+      list.map((item) =>
+        item === plused ? { ...item, quantity: item.quantity++ } : item
+      )
+    );
+    setTotal((prev) => prev + price);
+  };
+
+  const handleMinus = (plused) => {
+    setSelectedList((list) =>
+      list.map((item) =>
+        item === plused ? { ...item, quantity: item.quantity-- } : item
+      )
+    );
+    setTotal((prev) => prev - price);
   };
 
   const handleClick = () => {
@@ -54,7 +73,8 @@ export default function ProductDetail() {
       (item) => item.color === options.color && item.size === options.size
     );
     if (filter.length === 0) {
-      setSelectedList((list) => [...list, options]);
+      setSelectedList((list) => [...list, { options, quantity: 1 }]);
+      setTotal((prev) => prev + price);
     } else {
       setMessage('이미 선택된 옵션입니다!');
       setTimeout(() => {
@@ -111,14 +131,15 @@ export default function ProductDetail() {
           !!options.size &&
           optionSelected &&
           addOptionToList()}
-
         <ul>
           {selectedList.map((item) => (
             <SelectedOptionList
               key={uuid()}
-              options={item}
+              list={item}
               title={title}
               price={price}
+              onPlus={handlePlus}
+              onMinus={handleMinus}
               onDelete={handleDelete}
             />
           ))}

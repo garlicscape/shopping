@@ -3,31 +3,27 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 import { TfiClose } from 'react-icons/tfi';
 
 export default function SelectedOptionList({
-  options,
+  list,
   title,
   price,
+  onPlus,
+  onMinus,
   onDelete,
 }) {
-  const { color, size } = options;
-  const [quantity, setQuantity] = useState(1);
+  const { options, quantity } = list;
+  //const [controlQuantity, setControlQuantity] = useState({ quantity });
 
-  const handlePlus = () => {
-    setQuantity(quantity + 1);
-  };
-
+  const handlePlus = () => onPlus(list);
   const handleMinus = () => {
-    if (quantity >= 2) {
-      setQuantity(quantity - 1);
-    }
+    if (quantity >= 2) onMinus(list);
   };
-
-  const handleDelete = () => onDelete(options);
+  const handleDelete = () => onDelete(list);
 
   return (
     <li className='p-3 border-b-2 border-gray-300 grid grid-cols-10 gap-3 items-center'>
       <div className='col-span-4'>
         <h3 className='mb-1 text-lg font-bold '>{title}</h3>
-        <span className='text-lg'>{`- ${color} [${size}]`}</span>
+        <span className='text-lg'>{`- ${options.color} [${options.size}]`}</span>
       </div>
       <div className='flex items-center col-span-3'>
         <AiOutlinePlus
