@@ -20,7 +20,7 @@ export default function Header() {
       <nav className='flex items-center gap-3 font-bold'>
         {user && <UserAvatar user={user} />}
         {user && (
-          <Link to='/cart' className='text-2xl'>
+          <Link to='/carts' className='text-2xl'>
             <BsCart />
           </Link>
         )}

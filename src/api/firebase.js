@@ -76,4 +76,6 @@ export async function getProducts() {
     .catch(console.error);
 }
 
-export async function addProductToCart() {}
+export async function addProductToCart(userId, product) {
+  return set(ref(database, `carts/${userId}/${product.id}`), product);
+}

@@ -5,6 +5,11 @@ import { AiFillTag } from 'react-icons/ai';
 import SelectedOptionList from '../components/SelectedOptionList';
 import { v4 as uuid } from 'uuid';
 import { AiOutlineStop } from 'react-icons/ai';
+import { addProductToCart } from '../api/firebase';
+import { useAuthContext } from '../components/context/AuthContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductDetail() {
   const {
@@ -16,10 +21,12 @@ export default function ProductDetail() {
     color: '',
     size: '',
   });
+  const [btnState, setBtnState] = useState('idle');
   const [total, setTotal] = useState(0);
   const [message, setMessage] = useState('');
   const [selectedList, setSelectedList] = useState([]);
   const [optionSelected, setOptionSelected] = useState(false);
+  const { user } = useAuthContext();
 
   const handleSelect = (e) => {
     const { id, value } = e.target;
@@ -64,8 +71,22 @@ export default function ProductDetail() {
   };
 
   const handleClick = () => {
-    const product = { id, title, image, price, size, color };
-    console.log({ product });
+    if (selectedList.length === 0) {
+      setMessage('선택사항이 없습니다!');
+      setTimeout(() => {
+        setMessage(null);
+      }, 2000);
+      return;
+    } else {
+      setBtnState('loading');
+      const product = { id, title, image, price, size, color, selectedList };
+      addProductToCart(user.uid, product).then(() => {
+        setBtnState('success');
+        setTimeout(() => {
+          setBtnState('idle');
+        }, 3000);
+      });
+    }
   };
 
   const addOptionToList = () => {
@@ -126,6 +147,7 @@ export default function ProductDetail() {
           >
             <option>-[필수] SIZE 선택-</option>
             {size &&
+              options.color &&
               size.map((size, index) => <option key={index}>{size}</option>)}
           </select>
         </div>
@@ -149,13 +171,24 @@ export default function ProductDetail() {
         </ul>
 
         <div className='my-8 flex justify-end items-baseline'>
-          <p className='mr-3'>총 상품금액 :</p>
+          <p className='mr-3'>총 상품금액</p>
           <p className='text-2xl font-bold'>{`₩${total}`}</p>
         </div>
 
         <ReactiveButton
           idleText='장바구니에 추가'
           color='blue'
+          buttonState={btnState}
+          loadingText={
+            <>
+              <FontAwesomeIcon icon={faSpinner} spin /> 장바구니에 넣는 중
+            </>
+          }
+          successText={
+            <>
+              <FontAwesomeIcon icon={faCheck} /> 장바구니에 넣었습니다.
+            </>
+          }
           style={{
             fontSize: '16px',
             fontWeight: 'bold',

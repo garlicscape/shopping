@@ -19,7 +19,7 @@ export default function SelectedOptionList({
   const handleDelete = () => onDelete(list);
 
   return (
-    <li className='p-3 border-b-2 border-gray-300 grid grid-cols-10 gap-3 items-center'>
+    <li className='p-4 border-b-2 border-gray-300 grid grid-cols-10 gap-3 items-center'>
       <div className='col-span-4'>
         <h3 className='mb-1 text-lg font-bold '>{title}</h3>
         <span className='text-lg'>{`- ${options.color} [${options.size}]`}</span>
