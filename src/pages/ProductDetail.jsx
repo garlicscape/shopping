@@ -41,8 +41,8 @@ export default function ProductDetail() {
   };
 
   const handleDelete = (deleted) => {
-    console.log(deleted);
     setSelectedList((list) => list.filter((option) => option !== deleted));
+    setTotal((prev) => prev - price * deleted.quantity);
   };
 
   const handlePlus = (plused) => {
@@ -70,7 +70,9 @@ export default function ProductDetail() {
 
   const addOptionToList = () => {
     const filter = selectedList.filter(
-      (item) => item.color === options.color && item.size === options.size
+      (item) =>
+        item.options.color === options.color &&
+        item.options.size === options.size
     );
     if (filter.length === 0) {
       setSelectedList((list) => [...list, { options, quantity: 1 }]);
@@ -131,6 +133,7 @@ export default function ProductDetail() {
           !!options.size &&
           optionSelected &&
           addOptionToList()}
+
         <ul>
           {selectedList.map((item) => (
             <SelectedOptionList
@@ -145,7 +148,10 @@ export default function ProductDetail() {
           ))}
         </ul>
 
-        <p className='text-right'>{`총 ${total}원`}</p>
+        <div className='my-8 flex justify-end items-baseline'>
+          <p className='mr-3'>총 상품금액 :</p>
+          <p className='text-2xl font-bold'>{`₩${total}`}</p>
+        </div>
 
         <ReactiveButton
           idleText='장바구니에 추가'
