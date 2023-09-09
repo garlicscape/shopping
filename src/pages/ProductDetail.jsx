@@ -71,22 +71,32 @@ export default function ProductDetail() {
   };
 
   const handleClick = () => {
-    if (selectedList.length === 0) {
-      setMessage('선택사항이 없습니다!');
-      setTimeout(() => {
-        setMessage(null);
-      }, 2000);
-      return;
-    } else {
-      setBtnState('loading');
-      const product = { id, title, image, price, size, color, selectedList };
-      addProductToCart(user.uid, product).then(() => {
+    addToCart()
+      .then(() => {
         setBtnState('success');
         setTimeout(() => {
           setBtnState('idle');
-        }, 3000);
+        }, 2000);
+      })
+      .catch(() => {
+        setMessage('선택사항이 없습니다!');
+        setTimeout(() => {
+          setMessage(null);
+        }, 2000);
       });
-    }
+  };
+
+  const addToCart = () => {
+    return new Promise((resolve, reject) => {
+      if (selectedList.length === 0) {
+        reject();
+      }
+      const product = { id, title, image, price };
+      selectedList.map((list) =>
+        addProductToCart(user.uid, product, list).then(setBtnState('loading'))
+      );
+      resolve();
+    });
   };
 
   const addOptionToList = () => {
