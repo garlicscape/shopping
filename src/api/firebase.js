@@ -105,3 +105,10 @@ export async function getCart(userId) {
 export async function removeItemInCart(userId, productId) {
   return remove(ref(database, `carts/${userId}/${productId}`));
 }
+
+export async function updateCartItem(userId, productId, product, quantity) {
+  return set(ref(database, `carts/${userId}/${productId}`), {
+    ...product,
+    quantity: quantity,
+  });
+}
