@@ -2,6 +2,15 @@
 module.exports = {
   content: ['./src/**/*.{html,js,jsx}'],
   theme: {
+    screens: {
+      sm: '640px',
+      md: '768px',
+      ml: '930px',
+      lg: '1035px',
+      xl: '1280px',
+      mxl: '1385px',
+      '2xl': '1536px',
+    },
     extend: {
       keyframes: {
         alert: {

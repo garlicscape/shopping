@@ -24,20 +24,37 @@ export default function CartItem({
   };
   return (
     <>
-      <li className='flex'>
-        <img className='w-60' src={image} alt={title} />
-        <div>
-          <h2>{title}</h2>
-          <p>{price * quantity}</p>
-          <p>{color}</p>
-          <p>{size}</p>
-          <div className='flex'>
-            <AiOutlineMinus onClick={handleMinus} className='cursor-pointer' />
-            {quantity}
-            <AiOutlinePlus onClick={handlePlus} className='cursor-pointer' />
+      <li className='flex shadow-md'>
+        <img className='w-60 rounded-l-md' src={image} alt={title} />
+        <div
+          className=' grid grid-rows-9 px-3 pb-3 pt-8 w-64 hover:w-72 hover:scale-x-105"
+         bg-neutral-50  rounded-r-sm transition-all ease-in-out duration-300
+         ml:w-44 ml:hover:w-52'
+        >
+          <h2 className='text-xl font-bold row-span-4 truncate hover:text-clip'>
+            {title}
+          </h2>
+          <div className='flex flex-col row-span-4 items-center'>
+            <p className='text-lg'>{`${color}[${size}]`}</p>
+            <div className='mt-2 w-28 flex justify-between items-center border bg-white'>
+              <AiOutlineMinus
+                onClick={handleMinus}
+                className='cursor-pointer mr-1 p-1 w-6 h-full  text-white bg-sky-600 hover:bg-sky-900'
+              />
+              <p className='text-lg'>{`${quantity}개`}</p>
+              <AiOutlinePlus
+                onClick={handlePlus}
+                className='cursor-pointer ml-1 p-1 w-6 h-full text-white bg-sky-600 hover:bg-sky-900'
+              />
+            </div>
           </div>
-          <p>{quantity}</p>
-          <TfiClose onClick={handleClick} className='cursor-pointer' />
+          <p className='text-2xl font-bold self-end'>{`₩${
+            price * quantity
+          }`}</p>
+          <TfiClose
+            onClick={handleClick}
+            className='cursor-pointer place-self-end text-gray-400 hover:text-gray-700'
+          />
         </div>
       </li>
     </>
