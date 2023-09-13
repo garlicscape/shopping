@@ -23,6 +23,11 @@ module.exports = {
       animation: {
         'appear-alert': 'alert 2s ease-out infinite',
       },
+      backgroundImage: {
+        banner1: `url('../public/images/banner2.jpg')`,
+        banner2: `url('../public/images/banner1.jpg')`,
+        banner3: `url('../public/images/banner3.jpg')`,
+      },
     },
   },
   plugins: [],
