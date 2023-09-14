@@ -65,11 +65,19 @@ export async function addNewProduct(product, imgURL) {
   });
 }
 
-export async function getProducts() {
+export async function getProducts(category) {
   return get(ref(database, 'products'))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        return Object.values(snapshot.val());
+        const items = snapshot.val() || {};
+        if (category) {
+          const result = Object.values(items).filter(
+            (item) => item.category[0] === category
+          );
+          return result;
+        } else {
+          return Object.values(items);
+        }
       }
       return [];
     })

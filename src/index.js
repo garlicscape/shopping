@@ -11,6 +11,12 @@ import NewProduct from '../src/pages/NewProduct';
 import Cart from './pages/Cart';
 import ProtectedRoute from './pages/ProtectedRoute';
 import ProductDetail from './pages/ProductDetail';
+import Top from './pages/Top';
+import Pants from './pages/Pants';
+import Outer from './pages/Outer';
+import Accessory from './pages/Accessory';
+import Bag from './pages/Bag';
+import Shoes from './pages/Shoes';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +26,12 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: '/products', element: <Products /> },
+      { path: '/products/outer', element: <Outer /> },
+      { path: '/products/top', element: <Top /> },
+      { path: '/products/pants', element: <Pants /> },
+      { path: '/products/accessory', element: <Accessory /> },
+      { path: '/products/bag', element: <Bag /> },
+      { path: '/products/shoes', element: <Shoes /> },
       {
         path: '/products/new',
         element: (
