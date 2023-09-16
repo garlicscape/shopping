@@ -1,29 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
+import NavbarDropMenu from './NavbarDropMenu';
+import { BiMenu } from 'react-icons/bi';
 
 export default function Navbar() {
+  const [toggle, setToggle] = useState(false);
+
+  const navbarInfo = [
+    { address: '/products', menu: '전체상품' },
+    {
+      address: '/products/outer',
+      menu: '아우터',
+      dropMenus: ['자켓', '코트', '가디건'],
+    },
+    {
+      address: '/products/top',
+      menu: '상의',
+      dropMenus: ['반팔', '후드티', '티셔츠', '니트'],
+    },
+    {
+      address: '/products/pants',
+      menu: '팬츠',
+      dropMenus: ['청바지', '반바지', '슬랙스'],
+    },
+    {
+      address: '/products/accessory',
+      menu: '액세사리',
+      dropMenus: ['모자', '벨트', '안경'],
+    },
+    { address: '/products/bag', menu: '가방' },
+    { address: '/products/shoes', menu: '신발' },
+  ];
+
   return (
-    <div className='flex justify-between items-center border-b-2'>
-      <nav className='my-1 text-lg hover:[&>*]:text-gray-600 [&>*]:mr-4 '>
-        <Link to='/products'>전체상품</Link>
-        <Link to='/products/outer'>아우터</Link>
-        <Link to='/products/top'>상의</Link>
-        <Link to='/products/pants'>팬츠</Link>
-        <Link to='/products/accessory'>액세사리</Link>
-        <Link to='/products/bag'>가방</Link>
-        <Link to='/products/shoes'>신발</Link>
-      </nav>
-      <form action=''>
-        <input
-          type='text'
-          placeholder='search..'
-          className='outline-none hidden md:inline'
+    <>
+      <div className='max-[639px]:relative flex justify-between border-b-2 sm:items-center'>
+        <BiMenu
+          className='sm:hidden text-2xl cursor-pointer'
+          onClick={() => setToggle(!toggle)}
         />
-        <button className='text-xl hover:scale-105 transition-all ease-out duration-300'>
-          <FiSearch />
-        </button>
-      </form>
-    </div>
+        <nav
+          className={` bg-white w-full max-[639px]:absolute max-[639px]:top-4 max-[639px]:z-10
+                     my-1 text-lg ${toggle ? ' block' : 'hidden'}
+                     sm:flex`}
+        >
+          {navbarInfo.map((navbar) => (
+            <div
+              className={`text-center sm:block sm:[&>ul]:hover:block sm:mr-5 sm:relative`}
+            >
+              <Link
+                to={navbar.address}
+                className='hover:text-gray-400'
+                onClick={() => setToggle(false)}
+              >
+                {navbar.menu}
+              </Link>
+              {navbar.dropMenus && (
+                <NavbarDropMenu dropMenus={navbar.dropMenus} />
+              )}
+            </div>
+          ))}
+        </nav>
+        <form action=''>
+          <button className='text-xl hover:scale-105 transition-all ease-out duration-300'>
+            <FiSearch />
+          </button>
+        </form>
+      </div>
+    </>
   );
 }
