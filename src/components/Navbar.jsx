@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { FiSearch } from 'react-icons/fi';
 import NavbarDropMenu from './NavbarDropMenu';
 import { BiMenu } from 'react-icons/bi';
+import { loadAllMenus } from '../api/menu';
 
 export default function Navbar() {
   const [toggle, setToggle] = useState(false);
   const [slideToggle, setSlideToggle] = useState(false);
+  const navbarInfo = loadAllMenus();
 
   useEffect(() => {
     if (toggle) {
@@ -17,32 +19,6 @@ export default function Navbar() {
       }, 200);
     }
   }, [toggle]);
-
-  const navbarInfo = [
-    { address: '/products', menu: '전체상품' },
-    {
-      address: '/products/outer',
-      menu: '아우터',
-      dropMenus: ['자켓', '코트', '가디건'],
-    },
-    {
-      address: '/products/top',
-      menu: '상의',
-      dropMenus: ['반팔', '후드티', '티셔츠', '니트'],
-    },
-    {
-      address: '/products/pants',
-      menu: '팬츠',
-      dropMenus: ['청바지', '반바지', '슬랙스'],
-    },
-    {
-      address: '/products/accessory',
-      menu: '액세사리',
-      dropMenus: ['모자', '벨트', '안경'],
-    },
-    { address: '/products/bag', menu: '가방' },
-    { address: '/products/shoes', menu: '신발' },
-  ];
 
   return (
     <>
@@ -63,7 +39,7 @@ export default function Navbar() {
               className='text-center py-1
             max-[639px]:hover:text-amber-500 max-[639px]:hover:scale-105
               max-[639px]:transition-transform
-              sm:block sm:[&>ul]:hover:block sm:mr-5 sm:relative
+              sm:block sm:[&>div]:hover:block sm:mr-5 sm:relative
               sm:before:w-full sm:before:h-1 sm:before:bg-sky-600 
               sm:before:transition-transform sm:before:duration-300 
               sm:before:absolute sm:before:bottom-0

@@ -1,7 +1,7 @@
 import React from 'react';
-import { getProducts } from '../api/firebase';
+import { getProducts } from '../../api/firebase';
 import { useQuery } from '@tanstack/react-query';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../../components/ProductCard';
 
 export default function Shoes() {
   const {
