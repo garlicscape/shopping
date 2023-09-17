@@ -19,9 +19,26 @@ module.exports = {
           '90%': { opacity: 1, transform: 'translateY(0)' },
           '100%': { opacity: 0.7, transform: 'translateY(-3px)' },
         },
+        appear: {
+          '0%': { opacity: 0.2 },
+          '100%': { opacity: 1 },
+        },
+        down: {
+          '0%': { opacity: 0, transform: 'translateY(-100%)' },
+          '70%': { opacity: 0 },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        up: {
+          '0%': { opacity: 1, transform: 'translateY(0)' },
+          '40%': { opacity: 0 },
+          '100%': { opacity: 0, transform: 'translateY(-50%)' },
+        },
       },
       animation: {
         'appear-alert': 'alert 2s ease-out infinite',
+        'appear-menu': 'appear 500ms ease-out',
+        'slide-down': 'down 300ms ease-out',
+        'slide-up': 'up 300ms ease-out',
       },
       backgroundImage: {
         banner1: `url('../public/images/banner2.jpg')`,
