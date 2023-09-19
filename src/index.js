@@ -30,6 +30,7 @@ import Slacks from './pages/clothes/pants/Slacks';
 import Hat from './pages/clothes/accessory/Hat';
 import Belt from './pages/clothes/accessory/Belt';
 import Glasses from './pages/clothes/accessory/Glasses';
+import LongTrousers from './pages/clothes/pants/LongTrousers';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
       { path: '/products/pants/jeans', element: <Jeans /> },
       { path: '/products/pants/shorts', element: <Shorts /> },
       { path: '/products/pants/slacks', element: <Slacks /> },
+      { path: '/products/pants/longtrousers', element: <LongTrousers /> },
 
       { path: '/products/accessory', element: <Accessory /> },
       { path: '/products/accessory/hat', element: <Hat /> },

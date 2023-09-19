@@ -1,19 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { getProducts } from '../../../api/firebase';
-import { useQuery } from '@tanstack/react-query';
 import ProductCard from '../../../components/ProductCard';
 
-export default function ShortSleeve() {
+export default function LongTrousers() {
   const {
     isLoading,
     error,
     data: products,
-  } = useQuery(['products'], () => getProducts('상의', '반팔'));
+  } = useQuery(['products'], () => getProducts('바지', '긴바지'));
   return (
     <>
       {isLoading && <p>loading...</p>}
       {error && <p>{error}</p>}
-      <h2 className='my-6 text-2xl font-bold text-center'>반팔</h2>
+      <h2 className='my-6 text-2xl font-bold text-center'>긴바지</h2>
       <ul className='grid grid-cols-1 gap-10 my-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
         {products &&
           products.map((product) => (

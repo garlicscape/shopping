@@ -65,18 +65,25 @@ export async function addNewProduct(product, imgURL) {
   });
 }
 
-export async function getProducts(category) {
+export async function getProducts(mainMenu = '', subMenu = '') {
   return get(ref(database, 'products'))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        const items = snapshot.val() || {};
-        if (category) {
-          const result = Object.values(items).filter(
-            (item) => item.category[0] === category
+        const products = snapshot.val() || {};
+        if (mainMenu) {
+          const mainMenuProducts = Object.values(products).filter(
+            (product) => product.category[0] === mainMenu
           );
-          return result;
+          if (subMenu) {
+            const subMenuProducts = mainMenuProducts.filter(
+              (product) => product.category[1] === subMenu
+            );
+            return subMenuProducts;
+          } else {
+            return mainMenuProducts;
+          }
         } else {
-          return Object.values(items);
+          return Object.values(products);
         }
       }
       return [];

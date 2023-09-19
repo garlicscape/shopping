@@ -26,6 +26,7 @@ const navbarInfo = [
       { address: '/products/pants/jeans', name: '청바지' },
       { address: '/products/pants/shorts', name: '반바지' },
       { address: '/products/pants/slacks', name: '슬랙스' },
+      { address: '/products/pants/longtrousers', name: '긴바지' },
     ],
   },
   {
