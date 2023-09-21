@@ -17,6 +17,7 @@ const navbarInfo = [
       { address: '/products/top/hood', name: '후드티' },
       { address: '/products/top/tshirt', name: '티셔츠' },
       { address: '/products/top/knit', name: '니트' },
+      { address: '/products/top/shirt', name: '셔츠' },
     ],
   },
   {

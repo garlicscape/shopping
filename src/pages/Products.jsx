@@ -8,7 +8,7 @@ export default function Products() {
     isLoading,
     error,
     data: products,
-  } = useQuery(['products'], getProducts());
+  } = useQuery(['products'], () => getProducts());
   return (
     <>
       {isLoading && <p>loading...</p>}
