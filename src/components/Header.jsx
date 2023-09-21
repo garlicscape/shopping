@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosBasket } from 'react-icons/io';
 import { BsCart } from 'react-icons/bs';
@@ -6,11 +6,22 @@ import UserAvatar from './UserAvatar';
 import { BiPencil } from 'react-icons/bi';
 import Button from '../components/ui/Button';
 import { useAuthContext } from './context/AuthContext';
-import { RiArrowDownSLine } from 'react-icons/ri';
+import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 
 export default function Header() {
   const { user, login, logout } = useAuthContext();
   const [toggle, setToggle] = useState(false);
+  const [slideToggle, setSlideToggle] = useState(false);
+
+  useEffect(() => {
+    if (toggle) {
+      setSlideToggle(true);
+    } else {
+      setTimeout(() => {
+        setSlideToggle(false);
+      }, 200);
+    }
+  }, [toggle]);
 
   return (
     <header className='my-6 flex max-[767px]:justify-between'>
@@ -21,39 +32,46 @@ export default function Header() {
       </Link>
       <nav className='flex items-center font-bold gap-2 max-[639px]:relative md:gap-3'>
         {user && <UserAvatar user={user} />}
-        {user && (
-          <RiArrowDownSLine
-            className='text-xl cursor-pointer sm:hidden'
-            onClick={() => setToggle(!toggle)}
-          />
-        )}
+        {user &&
+          (toggle ? (
+            <RiArrowUpSLine
+              className='text-xl cursor-pointer sm:hidden animate-rotate-half'
+              onClick={() => setToggle(!toggle)}
+            />
+          ) : (
+            <RiArrowDownSLine
+              className='text-xl cursor-pointer sm:hidden animate-rotate-half'
+              onClick={() => setToggle(!toggle)}
+            />
+          ))}
         <div
-          className={`${
-            toggle
-              ? 'block absolute top-11 right-24 z-10 rounded-b-md bg-slate-200'
-              : 'hidden'
-          } sm:flex sm:gap-2 md:gap-3`}
+          className={`
+          ${slideToggle ? 'block' : 'hidden'}               
+          ${toggle ? 'animate-slide-down' : 'animate-slide-up'}
+          max-[639px]:absolute max-[639px]:top-11  max-[639px]:right-24 max-[639px]:z-10 
+            max-[639px]:rounded-b-md  max-[639px]:bg-white max-[639px]:shadow-lg
+            text-lg 
+            sm:text-2xl sm:flex sm:gap-2 
+            md:gap-3`}
         >
           {user && (
             <Link
               to='/carts'
-              className='text-lg
-               sm:text-2xl
-               max-[639px]:px-3 max-[639px]:pt-4 max-[639px]:flex'
+              className='max-[639px]:pt-4 max-[639px]:px-3 group max-[639px]:flex max-[639px]:relative'
             >
-              <BsCart />
-              <p className='ml-1 text-sm inline sm:hidden'>장바구니</p>
+              <BsCart className='z-10' />
+              <p className='ml-1 z-10 text-sm inline sm:hidden'>장바구니</p>
+              <span className='inline absolute h-10 top-1 w-0 left-0 bg-slate-100 transition-all duration-300  group-hover:w-full sm:hidden'></span>
             </Link>
           )}
           {user && user.isAdmin && (
             <Link
               to='/products/new'
-              className='text-lg 
-              sm:text-2xl 
-              max-[639px]:px-3 max-[639px]:py-3 max-[639px]:flex'
+              className='max-[639px]:py-3 max-[639px]:pt-4 max-[639px]:px-3 group max-[639px]:flex max-[639px]:relative'
             >
-              <BiPencil />
-              <p className='ml-1 text-sm inline sm:hidden'>상품등록</p>
+              <BiPencil className='z-10' />
+              <p className='ml-1 z-10 text-sm inline sm:hidden'>상품등록</p>
+              <span className='inline absolute h-10 top-2 w-0 left-0 bg-slate-100 rounded-b-md transition-all duration-300 group-hover:w-full sm:hidden'></span>
             </Link>
           )}
         </div>
@@ -63,3 +81,16 @@ export default function Header() {
     </header>
   );
 }
+/*
+(toggle ? (
+            <RiArrowUpSLine
+              className='text-xl cursor-pointer sm:hidden'
+              onClick={() => setToggle(!toggle)}
+            />
+          ) : (
+            <RiArrowDownSLine
+              className='text-xl cursor-pointer sm:hidden'
+              onClick={() => setToggle(!toggle)}
+            />
+          ))
+*/

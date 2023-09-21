@@ -33,12 +33,17 @@ module.exports = {
           '40%': { opacity: 0 },
           '100%': { opacity: 0, transform: 'translateY(-50%)' },
         },
+        rotate: {
+          '0%': { transform: 'rotate(180deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
       animation: {
         'appear-alert': 'alert 2s ease-out infinite',
         'appear-menu': 'appear 500ms ease-out',
         'slide-down': 'down 300ms ease-out',
         'slide-up': 'up 300ms ease-out',
+        'rotate-half': 'rotate 300ms ease-out',
       },
       backgroundImage: {
         banner1: `url('../public/images/banner2.jpg')`,

@@ -38,13 +38,13 @@ export default function Navbar() {
             <div
               className='text-center py-1
             max-[639px]:hover:text-amber-500 max-[639px]:hover:scale-105
-              max-[639px]:transition-transform
               sm:block sm:[&>div]:hover:block sm:mr-5 sm:relative
               sm:before:w-full sm:before:h-1 sm:before:bg-sky-600 
-              sm:before:transition-transform sm:before:duration-300 
+              sm:before:duration-300 
               sm:before:absolute sm:before:bottom-0
               sm:before:scale-x-0 sm:before:origin-center 
-              sm:hover:before:scale-x-100 sm:hover:before:origin-center'
+              sm:hover:before:scale-x-100 sm:hover:before:origin-center
+              transition-transform '
             >
               <Link
                 to={navbar.address}
