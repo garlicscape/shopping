@@ -8,6 +8,7 @@ import { BiPencil } from 'react-icons/bi';
 import { useAuthContext } from './context/AuthContext';
 import { RiArrowDownSLine, RiArrowUpSLine } from 'react-icons/ri';
 import CartStatus from './CartStatus';
+import UserMenuInMobile from './UserMenuInMobile';
 
 export default function Header() {
   const { user, login, logout } = useAuthContext();
@@ -58,11 +59,14 @@ export default function Header() {
           {user && (
             <Link
               to='/carts'
-              className='max-[639px]:pt-4 group max-[639px]:flex max-[639px]:justify-center max-[639px]:relative'
+              className='max-[639px]:pt-4 group max-[639px]:flex max-[639px]:justify-center relative'
             >
               <BsCart className='z-10' />
-              <p className='ml-1 z-10 text-sm inline sm:hidden'>장바구니</p>
-              <span className='inline absolute h-10 top-1 w-0 left-0 bg-slate-100 transition-all duration-300  group-hover:w-full sm:hidden'></span>
+              <UserMenuInMobile
+                menuName='장바구니'
+                highlighterHeight='10'
+                highlighterTop='1'
+              />
               <CartStatus />
             </Link>
           )}
@@ -72,8 +76,11 @@ export default function Header() {
               className='max-[639px]:py-2 max-[639px]:pt-4 group max-[639px]:flex max-[639px]:justify-center max-[639px]:relative'
             >
               <BiPencil className='z-10' />
-              <p className='ml-1 z-10 text-sm inline sm:hidden'>상품등록</p>
-              <span className='inline absolute h-9 top-2 w-0 left-0 bg-slate-100 transition-all duration-300 group-hover:w-full sm:hidden'></span>
+              <UserMenuInMobile
+                menuName='상품등록'
+                highlighterHeight='9'
+                highlighterTop='2'
+              />
             </Link>
           )}
           {!user && <Button text='Login' onClick={login} />}
