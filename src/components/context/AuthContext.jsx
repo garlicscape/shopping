@@ -9,7 +9,6 @@ export function AuthContextProvider({ children }) {
     onUserStateChange((user) => {
       localStorage.setItem('user', JSON.stringify(user));
       setUser(user);
-      console.log(user);
     });
   }, []);
   return (

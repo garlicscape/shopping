@@ -34,8 +34,9 @@ export default function Navbar() {
                     ${slideToggle ? 'block' : 'hidden'}               
                     ${toggle ? 'animate-slide-down' : 'animate-slide-up'}`}
         >
-          {navbarInfo.map((navbar) => (
+          {navbarInfo.map((navbar, index) => (
             <div
+              key={index}
               className='text-center py-1
             max-[639px]:hover:text-amber-500 max-[639px]:hover:scale-105
               sm:block sm:[&>div]:hover:block sm:mr-5 sm:relative
