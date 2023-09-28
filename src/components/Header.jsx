@@ -50,8 +50,8 @@ export default function Header() {
           className={`
           ${slideToggle ? 'block' : 'hidden'}               
           ${toggle ? 'animate-slide-down' : 'animate-slide-up'}
-          max-[639px]:absolute max-[639px]:top-11 max-[639px]:right-0 max-[639px]:z-10 
-          max-[639px]:rounded-b-md max-[639px]:w-28 max-[639px]:h-[7.25rem] max-[639px]:bg-white max-[639px]:shadow-xl max-[639px]:flex-col
+          max-[639px]:absolute max-[639px]:top-11 max-[639px]:right-[5.5rem] max-[639px]:z-10 
+          max-[639px]:rounded-b-md max-[639px]:w-28 max-[639px]:h-[5.125rem] max-[639px]:bg-white max-[639px]:shadow-xl max-[639px]:flex-col
           text-lg flex
           sm:text-2xl sm:gap-2 sm:items-center sm:flex
           md:gap-3`}
@@ -64,8 +64,8 @@ export default function Header() {
               <BsCart className='z-10' />
               <UserMenuInMobile
                 menuName='장바구니'
-                highlighterHeight='10'
-                highlighterTop='1'
+                highlighterHeight='h-10'
+                highlighterTop='top-1'
               />
               <CartStatus />
             </Link>
@@ -78,14 +78,14 @@ export default function Header() {
               <BiPencil className='z-10' />
               <UserMenuInMobile
                 menuName='상품등록'
-                highlighterHeight='9'
-                highlighterTop='2'
+                highlighterHeight='h-9'
+                highlighterTop='top-2'
               />
             </Link>
           )}
-          {!user && <Button text='Login' onClick={login} />}
-          {user && <Button text='Logout' onClick={logout} />}
         </div>
+        {!user && <Button text='Login' onClick={login} />}
+        {user && <Button text='Logout' onClick={logout} />}
       </nav>
     </header>
   );
