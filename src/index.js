@@ -32,6 +32,7 @@ import Belt from './pages/clothes/accessory/Belt';
 import Glasses from './pages/clothes/accessory/Glasses';
 import LongTrousers from './pages/clothes/pants/LongTrousers';
 import Shirt from './pages/clothes/top/Shirt';
+import Search from './pages/Search';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: '/products', element: <Products /> },
+      { path: '/products/:searchText', element: <Search /> },
 
       { path: '/products/outer', element: <Outer /> },
       { path: '/products/outer/jacket', element: <Jacket /> },
