@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { addNewProduct } from '../api/firebase';
 import { uploadImg } from '../api/upload';
 import React, { useState } from 'react';
 import ReactiveButton from 'reactive-button';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import useProducts from '../hook/useProducts';
 
 const INPUT_CLASS = 'h-10 px-2 outline-none focus:bg-gray-100 text-lg';
 
@@ -12,6 +12,7 @@ export default function NewProduct() {
   const [file, setFile] = useState();
   const [product, setProduct] = useState({});
   const [btnState, setBtnState] = useState('idle');
+  const { addProduct } = useProducts();
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -28,13 +29,17 @@ export default function NewProduct() {
     setBtnState('loading');
     uploadImg(file) //
       .then((url) => {
-        addNewProduct(product, url) //
-          .then(() => {
-            setBtnState('success');
-            setTimeout(() => {
-              setBtnState('idle');
-            }, 4000);
-          });
+        addProduct.mutate(
+          { product, url },
+          {
+            onSuccess: () => {
+              setBtnState('success');
+              setTimeout(() => {
+                setBtnState('idle');
+              }, 4000);
+            },
+          }
+        );
       });
   };
 
