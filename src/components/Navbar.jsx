@@ -77,7 +77,7 @@ export default function Navbar() {
           type='text'
           value={searchText}
           onChange={handleChange}
-          className='border-2 border-gray-300 outline-none p-1 text-sm'
+          className='border-2 border-gray-300 outline-none p-1 text-sm w-56'
         />
         <button className='text-2xl hover:scale-105 transition-all ease-out duration-300'>
           <FiSearch />

@@ -127,3 +127,15 @@ export async function updateCartItem(userId, productId, product, quantity) {
     quantity: quantity,
   });
 }
+
+export async function getSearchedItem(searchText) {
+  return get(ref(database, `products`))
+    .then((snapshot) => {
+      const products = snapshot.val() || {};
+      const searched = Object.values(products).filter(
+        (product) => product.title.includes(searchText) === true
+      );
+      return searched;
+    })
+    .catch(console.error);
+}
