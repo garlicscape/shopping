@@ -42,7 +42,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: '/products', element: <Products /> },
-      { path: '/products/:searchText', element: <Search /> },
+      { path: '/products/search/:searchText', element: <Search /> },
 
       { path: '/products/outer', element: <Outer /> },
       { path: '/products/outer/jacket', element: <Jacket /> },

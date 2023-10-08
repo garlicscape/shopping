@@ -20,7 +20,7 @@ export default function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchText('');
-    navigate(`/products/${searchText}`);
+    navigate(`/products/search/${searchText}`);
   };
 
   useEffect(() => {

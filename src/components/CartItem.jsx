@@ -1,26 +1,25 @@
 import React from 'react';
 import { TfiClose } from 'react-icons/tfi';
-import { removeItemInCart, updateCartItem } from '../api/firebase';
-import { useAuthContext } from './context/AuthContext';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
+import useCart from '../hook/useCart';
 
 export default function CartItem({
   product,
   product: { id, title, image, price, size, color, quantity },
 }) {
-  const { user } = useAuthContext();
+  const { removeProduct, updateProductQuantity } = useCart();
 
   const handleClick = () => {
-    removeItemInCart(user.uid, id);
+    removeProduct.mutate(id);
   };
 
   const handleMinus = () => {
     if (quantity < 2) return;
-    updateCartItem(user.uid, id, product, quantity - 1);
+    updateProductQuantity.mutate(id, product, quantity - 1);
   };
 
   const handlePlus = () => {
-    updateCartItem(user.uid, id, product, quantity + 1);
+    updateProductQuantity.mutate(id, product, quantity + 1);
   };
   return (
     <>

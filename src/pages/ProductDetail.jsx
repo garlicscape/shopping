@@ -5,11 +5,10 @@ import { AiFillTag } from 'react-icons/ai';
 import SelectedOptionList from '../components/SelectedOptionList';
 import { v4 as uuid } from 'uuid';
 import { AiOutlineStop } from 'react-icons/ai';
-import { addProductToCart } from '../api/firebase';
-import { useAuthContext } from '../components/context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import useCart from '../hook/useCart';
 
 export default function ProductDetail() {
   const {
@@ -26,7 +25,7 @@ export default function ProductDetail() {
   const [message, setMessage] = useState('');
   const [selectedList, setSelectedList] = useState([]);
   const [optionSelected, setOptionSelected] = useState(false);
-  const { user } = useAuthContext();
+  const { addProduct } = useCart();
 
   const handleSelect = (e) => {
     const { id, value } = e.target;
@@ -93,7 +92,12 @@ export default function ProductDetail() {
       }
       const product = { id, title, image, price };
       selectedList.map((list) =>
-        addProductToCart(user.uid, product, list).then(setBtnState('loading'))
+        addProduct.mutate(
+          { product, list },
+          {
+            onSuccess: () => setBtnState('loading'),
+          }
+        )
       );
       resolve();
     });
