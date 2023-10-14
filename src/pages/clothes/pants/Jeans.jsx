@@ -1,14 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { getProducts } from '../../../api/firebase';
 import ProductCard from '../../../components/ProductCard';
+import useProducts from '../../../hook/useProducts';
 
 export default function Jeans() {
   const {
-    isLoading,
-    error,
-    data: products,
-  } = useQuery(['products'], () => getProducts('바지', '청바지'));
+    productsQuery: { isLoading, error, data: products },
+  } = useProducts('바지', '청바지');
+
   return (
     <>
       {isLoading && <p>loading...</p>}

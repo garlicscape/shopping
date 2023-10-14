@@ -65,7 +65,7 @@ export async function addNewProduct(product, imgURL) {
   });
 }
 
-export async function getProducts(mainMenu = '', subMenu = '') {
+export async function getProducts(mainMenu, subMenu) {
   return get(ref(database, 'products'))
     .then((snapshot) => {
       if (snapshot.exists()) {

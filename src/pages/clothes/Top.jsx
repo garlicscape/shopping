@@ -1,17 +1,14 @@
 import React from 'react';
-import { getProducts } from '../../api/firebase';
-import { useQuery } from '@tanstack/react-query';
 import ProductCard from '../../components/ProductCard';
 import { loadSomeDropmenu } from '../../api/menu';
 import CategoriesInMainPage from '../../components/CategoriesInMainPage';
+import useProducts from '../../hook/useProducts';
 
 export default function Top() {
   const categories = loadSomeDropmenu('상의');
   const {
-    isLoading,
-    error,
-    data: products,
-  } = useQuery(['products'], () => getProducts('상의'));
+    productsQuery: { isLoading, error, data: products },
+  } = useProducts('상의');
 
   return (
     <>

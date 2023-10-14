@@ -1,17 +1,15 @@
 import React from 'react';
-import { getProducts } from '../../api/firebase';
-import { useQuery } from '@tanstack/react-query';
 import ProductCard from '../../components/ProductCard';
 import { loadSomeDropmenu } from '../../api/menu';
 import CategoriesInMainPage from '../../components/CategoriesInMainPage';
+import useProducts from '../../hook/useProducts';
 
 export default function Outer() {
   const categories = loadSomeDropmenu('아우터');
   const {
-    isLoading,
-    error,
-    data: products,
-  } = useQuery(['products'], () => getProducts('아우터'));
+    productsQuery: { isLoading, error, data: products },
+  } = useProducts('아우터', '');
+
   return (
     <>
       {isLoading && <p>loading...</p>}

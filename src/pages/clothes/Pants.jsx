@@ -1,17 +1,14 @@
 import React from 'react';
-import { getProducts } from '../../api/firebase';
-import { useQuery } from '@tanstack/react-query';
 import ProductCard from '../../components/ProductCard';
 import { loadSomeDropmenu } from '../../api/menu';
 import CategoriesInMainPage from '../../components/CategoriesInMainPage';
+import useProducts from '../../hook/useProducts';
 
 export default function Pants() {
   const categories = loadSomeDropmenu('팬츠');
   const {
-    isLoading,
-    error,
-    data: products,
-  } = useQuery(['products'], () => getProducts('바지'));
+    productsQuery: { isLoading, error, data: products },
+  } = useProducts('바지');
 
   return (
     <>

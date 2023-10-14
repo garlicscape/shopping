@@ -6,6 +6,7 @@ import { AuthContextProvider } from './components/context/AuthContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClinet = new QueryClient();
+
 function App() {
   return (
     <QueryClientProvider client={queryClinet}>
