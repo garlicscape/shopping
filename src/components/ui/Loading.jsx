@@ -6,7 +6,7 @@ export default function Loading() {
   return (
     <p className='text-center'>
       로딩 중
-      <FontAwesomeIcon icon={faSpinner} spin className='ml-2' />
+      <FontAwesomeIcon icon={faSpinner} spin className='ml-2 mt-16' />
     </p>
   );
 }

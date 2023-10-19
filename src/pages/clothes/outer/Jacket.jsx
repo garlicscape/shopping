@@ -2,6 +2,7 @@ import React from 'react';
 import ProductCard from '../../../components/ProductCard';
 import useProducts from '../../../hook/useProducts';
 import Loading from '../../../components/ui/Loading';
+import SubmenusInPage from '../../../components/SubmenusInPage';
 
 export default function Jacket() {
   const {
@@ -11,7 +12,7 @@ export default function Jacket() {
   return (
     <>
       {error && <p>{error}</p>}
-      <h2 className='my-6 text-2xl font-bold text-center'>자켓</h2>
+      <SubmenusInPage menuName='아우터' clickedsubMenu='자켓' />
       {isLoading && <Loading />}
       <ul className='grid grid-cols-1 gap-10 my-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4'>
         {products &&
