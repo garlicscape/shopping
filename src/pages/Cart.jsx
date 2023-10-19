@@ -5,6 +5,7 @@ import { FaEquals } from 'react-icons/fa';
 import PriceCard from '../components/PriceCard';
 import Button from '../components/ui/Button';
 import useCart from '../hook/useCart';
+import Loading from '../components/ui/Loading';
 
 const SHIPPING = 3000;
 
@@ -13,7 +14,7 @@ export default function Cart() {
     cartQuery: { isLoading, data: products },
   } = useCart();
 
-  if (isLoading) <p>Loading...</p>;
+  if (isLoading) <Loading />;
 
   const hasProducts = products && products.length > 0;
   const totalPrice =
