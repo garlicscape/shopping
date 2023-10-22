@@ -20,8 +20,7 @@ export default function useCart() {
   );
 
   const putProductsOnCart = useMutation(
-    (productToCart) => {
-      const { product, selectedOption } = productToCart;
+    ({ product, selectedOption }) => {
       addProductToCart(user.uid, product, selectedOption);
     },
     {
@@ -38,8 +37,7 @@ export default function useCart() {
   });
 
   const updateProductQuantity = useMutation(
-    (productToControl) => {
-      const { id, product, quantity } = productToControl;
+    ({ id, product, quantity }) => {
       updateCartItem(user.uid, id, product, quantity);
     },
     {

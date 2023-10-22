@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import NotFound from '../src/pages/NotFound';
 import Home from '../src/pages/Home';
-import Products from '../src/pages/Products';
+import AllProducts from '../src/pages/AllProducts';
 import NewProduct from '../src/pages/NewProduct';
 import Cart from './pages/Cart';
 import ProtectedRoute from './pages/ProtectedRoute';
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { index: true, element: <Home /> },
-      { path: '/products', element: <Products /> },
+      { path: '/products', element: <AllProducts /> },
       { path: '/products/search/:searchText', element: <Search /> },
 
       { path: '/products/outer', element: <Outer /> },
