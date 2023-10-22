@@ -6,10 +6,12 @@ export default function CartStatus() {
     cartQuery: { data: products },
   } = useCart();
 
-  const sumQuantity = Object.values(products).reduce(
-    (acc, product) => acc + product.quantity,
-    0
-  );
+  const sumQuantity = products
+    ? Object.values(products).reduce(
+        (acc, product) => acc + product.quantity,
+        0
+      )
+    : [];
 
   return (
     <>

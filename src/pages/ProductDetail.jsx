@@ -23,9 +23,9 @@ export default function ProductDetail() {
   const [btnState, setBtnState] = useState('idle');
   const [total, setTotal] = useState(0);
   const [message, setMessage] = useState('');
-  const [selectedList, setSelectedList] = useState([]);
+  const [selectedOptionList, setSelectedOptionList] = useState([]);
   const [optionSelected, setOptionSelected] = useState(false);
-  const { addProduct } = useCart();
+  const { putProductsOnCart } = useCart();
 
   const handleSelect = (e) => {
     const { id, value } = e.target;
@@ -47,12 +47,14 @@ export default function ProductDetail() {
   };
 
   const handleDelete = (deleted) => {
-    setSelectedList((list) => list.filter((option) => option !== deleted));
+    setSelectedOptionList((list) =>
+      list.filter((option) => option !== deleted)
+    );
     setTotal((prev) => prev - price * deleted.quantity);
   };
 
   const handlePlus = (plused) => {
-    setSelectedList((list) =>
+    setSelectedOptionList((list) =>
       list.map((item) =>
         item === plused ? { ...item, quantity: item.quantity++ } : item
       )
@@ -61,7 +63,7 @@ export default function ProductDetail() {
   };
 
   const handleMinus = (plused) => {
-    setSelectedList((list) =>
+    setSelectedOptionList((list) =>
       list.map((item) =>
         item === plused ? { ...item, quantity: item.quantity-- } : item
       )
@@ -87,13 +89,13 @@ export default function ProductDetail() {
 
   const addToCart = () => {
     return new Promise((resolve, reject) => {
-      if (selectedList.length === 0) {
+      if (selectedOptionList.length === 0) {
         reject();
       }
       const product = { id, title, image, price };
-      selectedList.map((list) =>
-        addProduct.mutate(
-          { product, list },
+      selectedOptionList.map((selectedOption) =>
+        putProductsOnCart.mutate(
+          { product, selectedOption },
           {
             onSuccess: () => setBtnState('loading'),
           }
@@ -104,13 +106,13 @@ export default function ProductDetail() {
   };
 
   const addOptionToList = () => {
-    const filter = selectedList.filter(
+    const filter = selectedOptionList.filter(
       (item) =>
         item.options.color === options.color &&
         item.options.size === options.size
     );
     if (filter.length === 0) {
-      setSelectedList((list) => [...list, { options, quantity: 1 }]);
+      setSelectedOptionList((list) => [...list, { options, quantity: 1 }]);
       setTotal((prev) => prev + price);
     } else {
       setMessage('이미 선택된 옵션입니다!');
@@ -171,7 +173,7 @@ export default function ProductDetail() {
           addOptionToList()}
 
         <ul>
-          {selectedList.map((item) => (
+          {selectedOptionList.map((item) => (
             <SelectedOptionList
               key={uuid()}
               list={item}

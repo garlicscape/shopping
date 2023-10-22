@@ -19,9 +19,11 @@ export default function useCart() {
     }
   );
 
-  const addProduct = useMutation(
-    (product, selectedOptions) =>
-      addProductToCart(user.uid, product, selectedOptions),
+  const putProductsOnCart = useMutation(
+    (productToCart) => {
+      const { product, selectedOption } = productToCart;
+      addProductToCart(user.uid, product, selectedOption);
+    },
     {
       onSuccess: () => {
         queryClient.invalidateQueries(['carts', user.uid]);
@@ -36,7 +38,10 @@ export default function useCart() {
   });
 
   const updateProductQuantity = useMutation(
-    (id, product, quantity) => updateCartItem(user.uid, id, product, quantity),
+    (productToControl) => {
+      const { id, product, quantity } = productToControl;
+      updateCartItem(user.uid, id, product, quantity);
+    },
     {
       onSuccess: () => {
         queryClient.invalidateQueries(['carts', user.uid]);
@@ -44,5 +49,5 @@ export default function useCart() {
     }
   );
 
-  return { cartQuery, addProduct, removeProduct, updateProductQuantity };
+  return { cartQuery, putProductsOnCart, removeProduct, updateProductQuantity };
 }

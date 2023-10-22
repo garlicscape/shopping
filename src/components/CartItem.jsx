@@ -15,11 +15,11 @@ export default function CartItem({
 
   const handleMinus = () => {
     if (quantity < 2) return;
-    updateProductQuantity.mutate(id, product, quantity - 1);
+    updateProductQuantity.mutate({ id, product, quantity: quantity - 1 });
   };
 
   const handlePlus = () => {
-    updateProductQuantity.mutate(id, product, quantity + 1);
+    updateProductQuantity.mutate({ id, product, quantity: quantity + 1 });
   };
   return (
     <>
