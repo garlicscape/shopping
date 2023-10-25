@@ -11,7 +11,7 @@ const HomeBanner = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: 1000,
-    autoplay: false,
+    autoplay: true,
     autoplaySpeed: 5000,
     pauseOnHover: true,
   };
