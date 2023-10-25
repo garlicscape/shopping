@@ -124,11 +124,15 @@ export default function ProductDetail() {
   };
 
   return (
-    <section className='mt-10 flex'>
+    <section className='mt-10 lg:flex'>
       <div className='basis-7/12 '>
-        <img src={image} alt={title} className='h-2/3 m-auto' />
+        <img
+          src={image}
+          alt={title}
+          className='max-[1035px]:w-1/2 lg:h-2/3 m-auto'
+        />
       </div>
-      <div className='basis-5/12 flex flex-col pr-8 mt-5 '>
+      <div className='basis-5/12 flex flex-col mb-3 mt-5 max-[1035px]:px-1 lg:pr-8'>
         <h2 className='text-3xl font-bold'>{title}</h2>
         <p className='flex items-center border-b-2 text-sm py-4 text-gray-600'>
           <AiFillTag className='mr-1' /> {description}
