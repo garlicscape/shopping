@@ -42,7 +42,7 @@ export default function Navbar() {
       />
       <nav
         className={`bg-white w-full py-1 text-lg md:flex
-                    max-[639px]:absolute max-[639px]:top-7 max-[639px]:z-10
+                    max-[639px]:absolute max-[639px]:top-9 max-[639px]:z-10
                     ${slideToggle ? 'block' : 'hidden'}               
                     ${toggle ? 'animate-slide-down' : 'animate-slide-up'}`}
       >
@@ -51,6 +51,7 @@ export default function Navbar() {
             key={index}
             className='text-center
             max-[639px]:hover:text-amber-500 max-[639px]:hover:scale-105
+              max-[639px]:pt-2
               sm:block sm:[&>div]:hover:block sm:mr-5 sm:relative
               sm:before:w-full sm:before:h-1 sm:before:bg-sky-600 
               sm:before:duration-300 

@@ -62,10 +62,10 @@ export default function ProductDetail() {
     setTotal((prev) => prev + price);
   };
 
-  const handleMinus = (plused) => {
+  const handleMinus = (reduced) => {
     setSelectedOptionList((list) =>
       list.map((item) =>
-        item === plused ? { ...item, quantity: item.quantity-- } : item
+        item === reduced ? { ...item, quantity: item.quantity-- } : item
       )
     );
     setTotal((prev) => prev - price);
