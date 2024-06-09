@@ -19,10 +19,15 @@ export function AuthContextProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
 function readUsersFromStorage() {
   const userData = localStorage.getItem('user');
-  return userData ? JSON.parse(userData) : null;
+  if (userData != null) {
+    return userData;
+  } else {
+    localStorage.setItem('user', JSON.stringify(user));
+    userData = localStorage.getItem('user');
+    return userData;
+  }
 }
 
 export function useAuthContext() {

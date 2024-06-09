@@ -19,7 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-const database = getDatabase(app);
+const database = getDatabase();
 
 export function login() {
   signInWithPopup(auth, provider).catch(console.error);
@@ -32,16 +32,19 @@ export async function logout() {
 
 export function onUserStateChange(callback) {
   onAuthStateChanged(auth, async (user) => {
+    if (user) console.log('we have user');
     const updatedUser = user ? await adminUser(user) : null;
+    console.log(updatedUser);
     callback(updatedUser);
   });
 }
 
 async function adminUser(user) {
-  return get(ref(database, 'admins'))
+  return get(ref(database), 'admins')
     .then((snapshot) => {
+      console.log(user);
       if (snapshot.exists()) {
-        const admins = snapshot.val();
+        const { admins } = snapshot.val();
         const isAdmin = admins.includes(user.uid);
         return { ...user, isAdmin };
       } else {

@@ -32,16 +32,18 @@ export async function logout() {
 
 export function onUserStateChange(callback) {
   onAuthStateChanged(auth, async (user) => {
+    if (user) console.log('we have user');
     const updatedUser = user ? await adminUser(user) : null;
     callback(updatedUser);
   });
 }
 
 async function adminUser(user) {
-  return get(ref(database, 'admins'))
+  console.log('adminUser function');
+  return get(ref(database), 'admins')
     .then((snapshot) => {
       if (snapshot.exists()) {
-        const admins = snapshot.val();
+        const { admins } = snapshot.val();
         const isAdmin = admins.includes(user.uid);
         return { ...user, isAdmin };
       } else {
@@ -49,7 +51,10 @@ async function adminUser(user) {
       }
       return user;
     })
-    .catch(console.error);
+    .catch();
+  {
+    console.log('error');
+  }
 }
 
 export async function addNewProduct(product, imgURL) {

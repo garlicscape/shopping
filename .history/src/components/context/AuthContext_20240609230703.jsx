@@ -2,10 +2,9 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { login, logout, onUserStateChange } from '../../api/firebase';
 
 const AuthContext = createContext();
+const [user, setUser] = useState(() => readUsersFromStorage());
 
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(() => readUsersFromStorage());
-
   useEffect(() => {
     onUserStateChange((user) => {
       localStorage.setItem('user', JSON.stringify(user));
@@ -19,10 +18,9 @@ export function AuthContextProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
 function readUsersFromStorage() {
   const userData = localStorage.getItem('user');
-  return userData ? JSON.parse(userData) : null;
+  if (userData != null) return userData;
 }
 
 export function useAuthContext() {

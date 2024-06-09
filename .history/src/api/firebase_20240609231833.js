@@ -19,8 +19,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-const database = getDatabase(app);
+const database = getDatabase();
 
+console.log(auth);
 export function login() {
   signInWithPopup(auth, provider).catch(console.error);
 }
@@ -38,10 +39,10 @@ export function onUserStateChange(callback) {
 }
 
 async function adminUser(user) {
-  return get(ref(database, 'admins'))
+  return get(ref(database), 'admins')
     .then((snapshot) => {
       if (snapshot.exists()) {
-        const admins = snapshot.val();
+        const { admins } = snapshot.val();
         const isAdmin = admins.includes(user.uid);
         return { ...user, isAdmin };
       } else {

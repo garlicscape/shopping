@@ -2,16 +2,19 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { login, logout, onUserStateChange } from '../../api/firebase';
 
 const AuthContext = createContext();
-
 export function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(() => readUsersFromStorage());
-
   useEffect(() => {
     onUserStateChange((user) => {
-      localStorage.setItem('user', JSON.stringify(user));
-      setUser(user);
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+      } catch (err) {
+        console.log(err);
+      }
     });
   }, []);
+
+  const [user, setUser] = useState(() => readUsersFromStorage());
 
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
@@ -19,10 +22,13 @@ export function AuthContextProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
 function readUsersFromStorage() {
   const userData = localStorage.getItem('user');
-  return userData ? JSON.parse(userData) : null;
+  try {
+    return userData ? JSON.parse(userData) : null;
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export function useAuthContext() {
