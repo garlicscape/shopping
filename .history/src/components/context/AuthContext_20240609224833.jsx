@@ -24,11 +24,7 @@ export function AuthContextProvider({ children }) {
 }
 function readUsersFromStorage() {
   const userData = localStorage.getItem('user');
-  try {
-    return userData ? JSON.parse(userData) : null;
-  } catch (err) {
-    console.log(err);
-  }
+  return userData ? JSON.parse(userData) : null;
 }
 
 export function useAuthContext() {

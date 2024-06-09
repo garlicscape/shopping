@@ -7,28 +7,21 @@ export function AuthContextProvider({ children }) {
 
   useEffect(() => {
     onUserStateChange((user) => {
-      try {
-        localStorage.setItem('user', JSON.stringify(user));
-        setUser(user);
-      } catch (err) {
-        console.log(err);
-      }
+      localStorage.setItem('user', JSON.stringify(user));
+      setUser(user);
     });
   }, []);
-
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 }
+
 function readUsersFromStorage() {
   const userData = localStorage.getItem('user');
-  try {
-    return userData ? JSON.parse(userData) : null;
-  } catch (err) {
-    console.log(err);
-  }
+  console.log(userData);
+  return userData ? JSON.parse(userData) : null;
 }
 
 export function useAuthContext() {

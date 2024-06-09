@@ -29,6 +29,7 @@ function readUsersFromStorage() {
   } catch (err) {
     console.log(err);
   }
+  //return userData ? JSON.parse(userData) : null;
 }
 
 export function useAuthContext() {
