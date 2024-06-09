@@ -4,7 +4,7 @@
   2023.08~2023.10
 
 #### 주소
-https://master--shopuss.netlify.app/
+https://shopp-us.netlify.app/
 
 ## 소개/기능
  의류 쇼핑몰 사이트
@@ -31,3 +31,17 @@ https://master--shopuss.netlify.app/
 
 #### Development
 <img alt="react" src="https://img.shields.io/badge/react-61DAFB?style=flat-square&logo=react&logoColor=white"/> <img alt="javascript" src="https://img.shields.io/badge/javascript-F7DF1E?style=flat-square&logo=javascript&logoColor=white"/> <img alt="firebase" src="https://img.shields.io/badge/firebase-FFCA28?style=flat-square&logo=firebase&logoColor=white"/> <img alt="tailwindcss" src="https://img.shields.io/badge/tailwindcss-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white"/> <br>
+
+## 화면 구성
+#### ▪ 메인화면
+![main](https://github.com/garlicscape/shopping/assets/49513878/5b075ce5-fea8-45e2-a18d-28a7d69489f6) <br><br>
+#### ▪ 카테고리 클릭할 때
+![outer](https://github.com/garlicscape/shopping/assets/49513878/e096007a-1405-469d-9fd9-e41a8568e21f) <br><br>
+#### ▪ 상품 상세 페이지
+![detail](https://github.com/garlicscape/shopping/assets/49513878/db8259da-5dc1-4d9f-a833-686422303171) <br><br>
+#### ▪ 장바구니
+![cart](https://github.com/garlicscape/shopping/assets/49513878/3b963046-2e9a-456a-929c-3cf5cd8186bc) <br><br>
+#### ▪ 새 상품 등록 
+![new](https://github.com/garlicscape/shopping/assets/49513878/c7074b5f-de9a-47c1-8f01-d673381870eb) <br><br>
+#### ▪ 검색
+![search](https://github.com/garlicscape/shopping/assets/49513878/32708c1f-380f-4134-b886-6fc6259c4a0a)
